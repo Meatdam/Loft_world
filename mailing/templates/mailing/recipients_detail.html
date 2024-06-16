@@ -1,0 +1,31 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/admin.css' %}" rel="stylesheet">{% endblock %}
+{% block content %}
+
+<div class="mx-auto mt-3" style="width: 900px;">
+    <div class="text-center text-white">
+        <h3>Клиент</h3>
+    </div>
+    <table class="table mt-3 text-white">
+        <thead>
+        <tr>
+            <th>Имя клиента</th>
+            <th>Email</th>
+            <th>Сообщение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ object.name }}</td>
+            <td>{{ object.email }}</td>
+            <td>{{ object.description }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <center><a type="submit" href="{% url 'mailing:recipients_list' %}"
+               class="w-50 mt-5 btn btn-outline-info ">Назад</a></center>
+</div>
+
+
+{% endblock %}
