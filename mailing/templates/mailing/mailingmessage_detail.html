@@ -1,0 +1,32 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/admin.css' %}" rel="stylesheet">{% endblock %}
+{% block content %}
+
+<div class="mx-auto mt-3" style="width: 900px;">
+    <div class="text-center text-white">
+        <h3>Сообщение</h3>
+    </div>
+    <table class="table mt-3 text-white">
+        <thead>
+        <tr>
+            <th>Заголовок сообщения</th>
+            <th>Сообщение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ object.title }}</td>
+            <td>{{ object.content }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <center><a type="submit" href="{% url 'mailing:message_list' %}"
+               class="w-50 mt-5 btn btn-outline-info ">Назад</a></center>
+    <center><a type="submit" href="{% url 'mailing:message_update' object.pk %}"
+               class="w-50 mt-1 btn btn-outline-warning ">Изменить</a></center>
+    <center><a type="submit" href="{% url 'mailing:message_delete' object.pk %}" class="w-50 mt-1 btn btn-outline-danger ">Удалить</a></center>
+</div>
+
+
+{% endblock %}

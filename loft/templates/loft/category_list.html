@@ -1,0 +1,51 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/index.css' %}" rel="stylesheet">{% endblock %}
+{% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
+{% block content %}
+{% load my_tags %}
+<h2 class="mb-3 mt-3 text-white">Loft World</h2>
+<h4 class="text-white mb-5 ml-5">Наша семья с каждым днем все больше и больше!</h4>
+<div class="row w-100 bg-secondary mb-5 p-5 text-white" style="border-radius: 10px">
+    <h3 class="row mb-5 text-white">Добро пожаловать в мир вкуса и стиля!</h3>
+<p>Мы предлагаем Вам не только готовые варианты:
+    мебели, светильников и элементов декора, но так же мы делаем на заказ как и интерьер для вашего
+    дома так и всевозможные навесы, заборы и многое другое!</p>
+<p>К каждому клиенту мы находим индивидуальный подход!
+Мы ценим ваше время и готовы воплотить все ваши желания и видения качественно и в срок!
+</p>
+</div>
+<main>
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+{% for object in categories %}
+        <div class="col">
+
+            <div class="card mb-4 bg-transparent text-white">
+                <div class="card-header py-3">
+                    <h4 class="my-0 ">{{ object.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'loft:product' object.id %}">
+                        <img class="card-img-top mb-3" style="border-radius: 30px;border: 3px solid white;" alt=""
+                             src="{{ object.image | media_filter }}">
+                    </a>
+
+
+                    {% if user.is_superuser or user.is_staff %}
+                     <a class="btn btn-outline-warning btn-block mt-2" href="{% url 'loft:edit' object.id %}">
+                                Редактировать
+                     </a>
+                    <a class="btn btn-outline-danger btn-block mt-2" href="{% url 'loft:delete' object.id %}">
+                                Удалить
+                     </a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+{% endfor %}
+    </div>
+
+</main>
+{% endblock %}

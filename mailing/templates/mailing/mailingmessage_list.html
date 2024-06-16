@@ -1,0 +1,30 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/admin.css' %}" rel="stylesheet">{% endblock %}
+{% block clude %}{% include 'mailing/includes/inc_admin_menu.html' %}{% endblock %}
+{% block content %}
+<main>
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+{% for message in object_list %}
+        <div class="col">
+
+
+            <div class="card mb-4 bg-transparent text-white">
+
+                <div class="card-header py-3">
+                    <h4 class="my-0 ">{{ message.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{ message.content|slice:100 }}...</p>
+                    <a type="submit" href="{% url 'mailing:message_detail' message.pk %}" class="w-100 btn btn-outline-info">Подробнее</a>
+                    <a type="submit" href="{% url 'mailing:message_delete' message.pk %}" class="w-100 btn btn-outline-danger mt-2">Удалить</a>
+                </div>
+
+            </div>
+
+        </div>
+{% endfor %}
+    </div>
+
+</main>
+{% endblock %}

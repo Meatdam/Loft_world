@@ -1,0 +1,44 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/index.css' %}" rel="stylesheet">{% endblock %}
+{% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
+{% block content %}
+{% load my_tags %}
+
+<main>
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+{% for product in object_list %}
+        <div class="col">
+
+
+            <div class="card mb-4 bg-transparent text-white">
+
+                <div class="card-header py-3">
+                    <h4 class="my-0 ">{{ product.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'loft:view' product.pk %}">
+                        <img class="card-img-top mb-3" style="border-radius: 30px;border: 3px solid white;" alt=""
+                             src="{{ product.image | media_filter }}">
+                    </a>
+
+                    <p>{{ product.description|slice:100 }}...</p>
+                    <a type="submit" href="{% url 'loft:view' product.pk %}" class="w-100 btn btn-outline-light">Подробнее</a>
+                    {% if user.is_superuser or user.is_staff %}
+                     <a class="btn btn-outline-warning btn-block mt-2" href="{% url 'loft:edit_product' product.pk %}">
+                                Редактировать
+                     </a>
+                    <a class="btn btn-outline-danger btn-block mt-2" href="{% url 'loft:delete_product' product.pk %}">
+                                Удалить
+                     </a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+{% endfor %}
+    </div>
+
+</main>
+{% endblock %}
