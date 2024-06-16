@@ -13,6 +13,7 @@ ________
 10. Есть форма с обратной связью, где клиент подписывается под рассылку всех акций скидок, новостей и т.д.
 
 Данный проект написан не фрейморке Django, с подключением реляционной базы данных "PostgreSQL"<br>
+Подключена БД "Redis", для работы с кешем сайта<br>
 Ипользовалось вирутальное окружение ```venv```
 В  проекте построенно 7 модель БД:
 1. Таблица "category";
@@ -26,7 +27,7 @@ ________
 Для запуска проекта необходимо сделать 
 1. git clone репозитория
 ```
-git@github.com:Meatdam/online_shop.git
+git@github.com:Meatdam/Loft_world.git
 ```
 2. Установить виртуальное окружение ```venv```
 ```
@@ -43,31 +44,24 @@ pip install -r requirements.txt
 ```
 6. Создать файл .env в корне проекта и заполнить следующие данные:
 ```
-# DB settings
-ENGINE=
-DB_NAME=
-USER_DB=
-PASSWORD_DB=
-
-# Email settings
-EMAIL_HOST_USER_MAIL=
-EMAIL_HOST_PASSWORD_MAIL=
-
-# email admin
-ADMIN_EMAIL=
-
-# secret key from django
-KEY=
-
-# domain settings
-DOMAIN=
+SECRET_KEY=
 
 DEBUG=
 
-# CACHE settings
+# db_settings
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+
+# email settings
+EMAIL_HOST_USER_MAIL=
+EMAIL_HOST_PASSWORD_MAIL=
+
+ADMIN_EMAIL=
+
+# cache settings
 CACHE_ENABLED=
 CACHES_BACKEND=
 CACHES_LOCATION=
-
 ```
 
