@@ -64,4 +64,6 @@ CACHE_ENABLED=
 CACHES_BACKEND=
 CACHES_LOCATION=
 ```
+Автор проекта:
+[Кузькин Илья](https://github.com/Meatdam)
 
