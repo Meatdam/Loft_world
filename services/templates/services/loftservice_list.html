@@ -1,7 +1,9 @@
-{% extends 'services/base.html' %}
-{% block content %}
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/services.css' %}" rel="stylesheet">{% endblock %}
 {% load my_tags %}
-
+{% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
+{% block content %}
 <main>
     <div class="row row-cols-1 row-cols-md-3 text-center">
 {% for servic in object_list %}
@@ -14,7 +16,7 @@
                     <h4 class="my-0 ">{{ servic.title }}</h4>
                 </div>
                 <div class="card-body">
-                    <a href="#">
+                    <a href="{% url 'services:detail_servic' servic.pk %}">
                         <img class="card-img-top mb-3" style="border-radius: 30px;border: 3px solid white;" alt=""
                              src="{{ servic.image | media_filter }}">
                     </a>

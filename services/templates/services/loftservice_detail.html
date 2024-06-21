@@ -1,7 +1,10 @@
-{% extends 'services/base.html' %}
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/services.css' %}" rel="stylesheet">{% endblock %}
 {% load my_tags %}
-{% block content %}
+{% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
 
+{% block content %}
 <div class="row ">
     <div class="col-lg-4 col-md-6 ">
         <div class="card h-80 ">

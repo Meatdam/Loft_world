@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
@@ -24,7 +25,7 @@ class ServicCategoryListView(TitleMixin, ListView):
         return context_data
 
 
-class ServicCategoryUpdateView(TitleMixin, UpdateView):
+class ServicCategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, UpdateView):
     """
     Класс для редактирования категории услуги
     """
@@ -32,22 +33,25 @@ class ServicCategoryUpdateView(TitleMixin, UpdateView):
     form_class = ServicCategoryForm
     title = 'Редактирование категории услуги'
     success_url = reverse_lazy('services:list')
+    permission_required = 'services.change_serviccategory'
 
 
-class ServicCategoryDeleteView(TitleMixin, DeleteView):
+class ServicCategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, DeleteView):
     """
     Класс для удаления категории услуги
     """
     model = ServicCategory
     title = 'Удаление категории услуги'
     success_url = reverse_lazy('services:list')
+    permission_required = 'services.delete_serviccategory'
 
 
-class ServicCategoryCreateView(TitleMixin, CreateView):
+class ServicCategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, CreateView):
     model = ServicCategory
     title = 'Создание категории услуги'
     form_class = ServicCategoryForm
     success_url = reverse_lazy('services:list')
+    permission_required = 'services.add_serviccategory'
 
 
 class LoftServiceListView(TitleMixin, ListView):
@@ -69,7 +73,7 @@ class LoftServiceListView(TitleMixin, ListView):
         return queryset.filter(category_id=servic_id) if servic_id else queryset
 
 
-class LoftServiceCreateView(TitleMixin, CreateView):
+class LoftServiceCreateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, CreateView):
     """
     Класс для создания услуги
     """
@@ -77,24 +81,27 @@ class LoftServiceCreateView(TitleMixin, CreateView):
     title = 'Создание услуги'
     form_class = LoftServiceForm
     success_url = reverse_lazy('services:list_servic')
+    permission_required = 'services.add_loftservice'
 
 
-class LoftServiceDeleteView(TitleMixin, DeleteView):
+class LoftServiceDeleteView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, DeleteView):
     """
     Класс для удаления услуги
     """
     model = LoftService
     title = 'Удаление услуги'
     success_url = reverse_lazy('services:list_servic')
+    permission_required = 'services.delete_loftservice'
 
 
-class LoftServiceUpdateView(TitleMixin, UpdateView):
+class LoftServiceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, UpdateView):
     """
     Класс для редактирования услуги
     """
     model = LoftService
     title = 'Редактирование услуги'
     form_class = LoftServiceForm
+    permission_required = 'services.change_loftservice'
 
     def get_success_url(self):
         loft_service = self.get_object()
@@ -117,5 +124,3 @@ class LoftServiceDetailView(TitleMixin, DetailView):
         self.object.views_count += 1
         self.object.save()
         return self.object
-
-
