@@ -1,8 +1,3 @@
-import uuid
-from datetime import timedelta
-
-from django import forms
-from django.utils.timezone import now
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from common.views import StyleFormMixin
