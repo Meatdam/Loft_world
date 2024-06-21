@@ -1,0 +1,49 @@
+{% extends 'loft/base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'css/index.css' %}" rel="stylesheet">{% endblock %}
+{% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
+{% block content %}
+{% load my_tags %}
+
+<main>
+    {% if user.is_authenticated %}
+    <div class="col-md-4 mb-3 mt-3">
+    <a type="submit" href="{% url 'blog:blog_create' %}" class="w-100 btn btn-outline-info">Добавить Отзыв</a>
+    </div>
+    {% endif %}
+        <div class="row row-cols-1 row-cols-md-3 text-center">
+{% for blog in object_list %}
+        <div class="col">
+
+
+            <div class="card mb-4 bg-transparent text-white">
+
+                <div class="card-header py-3">
+                    <h4 class="my-0 ">{{ blog.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'blog:blog_detail' blog.pk %}">
+                        <img class="card-img-top mb-3" style="border-radius: 30px;border: 3px solid white;" alt=""
+                             src="{{ blog.image | media_filter }}">
+                    </a>
+
+                    <p>{{ blog.description|slice:100 }}...</p>
+                    <a type="submit" href="{% url 'blog:blog_detail' blog.pk %}" class="w-100 btn btn-outline-light">Подробнее</a>
+                    {% if user == blog.owner or user.is_superuser %}
+                     <a class="btn btn-outline-warning btn-block mt-2" href="{% url 'blog:blog_update' blog.pk %}">
+                                Редактировать
+                     </a>
+                    <a class="btn btn-outline-danger btn-block mt-2" href="{% url 'blog:blog_delete' blog.pk %}">
+                                Удалить
+                     </a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+{% endfor %}
+    </div>
+
+</main>
+{% endblock %}
