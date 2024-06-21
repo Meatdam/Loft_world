@@ -5,11 +5,26 @@
 {% block clude %}{% include 'includes/inc_menu.html' %}{% endblock %}
 
 {% block content %}
-<div class="col-md-4">
-    <a class="btn btn-outline-info btn-block mt-5 mb-5" href="{% url 'services:servic_list' %}">
+<h2 class="mb-3 mt-3 text-white">Loft World</h2>
+<div class="row w-100 bg-secondary mb-5 p-5 text-white" style="border-radius: 10px">
+    <h3 class="mb-2 text-white text-center">В этом разделе:</h3>
+<p>Мы предлагаем ознакомиться с услугами изготовление мебели на заказ, под ваши личные предпочтения.<br>
+   Услугами установки сложных конструкций таких как:<br>- пораящая кровать;
+    <br>- навесы под авто;
+    <br>- сборка мебели;<br>
+- установка светильных с сложным исполнением<br>
+Все предлогаемые наши услуги, вы можете посмотреть в данном разделе!</p>
+
+<p>К каждому клиенту мы находим индивидуальный подход!
+Мы ценим ваше время и готовы воплотить все ваши желания и видения качественно и в срок!
+</p>
+    <div class="col-md-4">
+    <a class="btn btn-info btn-block mt-2 mb-2" href="{% url 'services:servic_list' %}">
         Список всех услуг
     </a>
 </div>
+</div>
+
 <div class="row text-center">
     {% for object in services %}
     <div class="col">
@@ -39,6 +54,7 @@
     </div>
     {% endfor %}
 </div>
+
 
 
 {% endblock %}
