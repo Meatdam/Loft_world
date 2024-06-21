@@ -36,10 +36,13 @@
                         </li>
                         <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админ-панель</a></li>
                         <li>
-                            <a class="dropdown-item" href="#">Создать рассылку</a>
+                            <a class="dropdown-item" href="{% url 'mailing:settings_create' %}">Создать рассылку</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Логи рассылок</a>
+                            <a class="dropdown-item" href="{% url 'mailing:settings_list' %}">Списко рассылок</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'mailing:status_list' %}">Логи рассылок</a>
                         </li>
                         <li>
 
