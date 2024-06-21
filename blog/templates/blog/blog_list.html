@@ -6,11 +6,21 @@
 {% load my_tags %}
 
 <main>
+
+    <h2 class="mb-3 mt-3 text-white">Loft World</h2>
+<div class="row w-100 bg-secondary mb-5 p-5 text-white" style="border-radius: 10px">
+    <h3 class=" text-center text-white">В этом разделе:</h3>
+<p>Собраны все отзывы наших клиентов, которые деляться своими впечатлениями о нашей компании,
+    наших сотрудниках и наших товаров.</p>
+<p>К каждому клиенту мы находим индивидуальный подход!
+Мы ценим ваше время и готовы воплотить все ваши желания и видения качественно и в срок!
+</p>
     {% if user.is_authenticated %}
     <div class="col-md-4 mb-3 mt-3">
-    <a type="submit" href="{% url 'blog:blog_create' %}" class="w-100 btn btn-outline-info">Добавить Отзыв</a>
+    <a type="submit" href="{% url 'blog:blog_create' %}" class="w-100 btn btn-info">Добавить Отзыв</a>
     </div>
     {% endif %}
+</div>
         <div class="row row-cols-1 row-cols-md-3 text-center">
 {% for blog in object_list %}
         <div class="col">
