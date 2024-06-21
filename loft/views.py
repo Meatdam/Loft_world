@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.views.generic.edit import FormMixin
@@ -42,43 +43,49 @@ class ProductListView(TitleMixin, ListView):
         return queryset.filter(category_id=category_id) if category_id else queryset
 
 
-class CategoryCreateView(TitleMixin, CreateView):
+class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, CreateView):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy('loft:index')
     title = 'Добавление категории'
+    permission_required = 'loft.add_category'
 
 
-class CategoryUbdateView(TitleMixin, UpdateView):
+class CategoryUbdateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy('loft:index')
     title = 'Редактирование категории'
+    permission_required = 'loft.change_category'
 
 
-class CategoryDeleteView(TitleMixin, DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, DeleteView):
     model = Category
     success_url = reverse_lazy('loft:index')
     title = 'Удаление категории'
+    permission_required = 'loft.delete_category'
 
 
-class ProductCreateView(TitleMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('loft:index')
     title = 'Добавление продукта'
+    permission_required = 'loft.add_product'
 
 
-class ProductDeleteView(TitleMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('loft:index')
     title = 'Удаление продукта'
+    permission_required = 'loft.delete_product'
 
 
-class ProductUpdateView(TitleMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, TitleMixin, UpdateView):
     model = Product
     form_class = ProductForm
     title = 'Редактирование продукта'
+    permission_required = 'loft.change_product'
 
     def get_success_url(self):
         return reverse_lazy('loft:product', kwargs={'category_id': self.object.category_id})
